@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Building2, Hammer, ArrowRight } from 'lucide-react';
+import { Building2, Hammer, ArrowRight, Smartphone, Play, Gift, GraduationCap, DollarSign, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { getCurrentUser, initializeDemoData } from '@/lib/storage';
@@ -65,6 +65,121 @@ export default function Home() {
           <p className="text-lg md:text-xl text-gray-700 mb-8">
             Conecte clientes e colaboradores de forma segura, sem compartilhar números de telefone
           </p>
+          
+          {/* Limpeza CTA - NOVO */}
+          <div className="mb-8 p-6 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-2xl shadow-2xl">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
+                  <Sparkles className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-xl font-bold text-white">Serviços de Limpeza</h3>
+                  <p className="text-sm text-cyan-100">Diaristas e equipes especializadas</p>
+                </div>
+              </div>
+              <Button 
+                size="lg"
+                onClick={() => router.push('/limpeza')}
+                className="bg-white text-cyan-900 hover:bg-cyan-50 font-bold shadow-xl"
+              >
+                Ver Serviços
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Mobile App CTA */}
+          <div className="mb-8 p-6 bg-gradient-to-r from-amber-900 to-orange-800 rounded-2xl shadow-2xl">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
+                  <Smartphone className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-xl font-bold text-white">Baixe nosso App</h3>
+                  <p className="text-sm text-amber-100">Disponível para iOS e Android</p>
+                </div>
+              </div>
+              <Button 
+                size="lg"
+                onClick={() => router.push('/mobile')}
+                className="bg-white text-amber-900 hover:bg-amber-50 font-bold shadow-xl"
+              >
+                Ver Detalhes
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Gallery CTA */}
+          <div className="mb-8 p-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl shadow-2xl">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
+                  <Play className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-xl font-bold text-white">Vídeos e Galeria</h3>
+                  <p className="text-sm text-purple-100">Conheça nossos serviços em ação</p>
+                </div>
+              </div>
+              <Button 
+                size="lg"
+                onClick={() => router.push('/galeria')}
+                className="bg-white text-purple-900 hover:bg-purple-50 font-bold shadow-xl"
+              >
+                Ver Galeria
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Cursos CTA */}
+          <div className="mb-8 p-6 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl shadow-2xl">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
+                  <GraduationCap className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-xl font-bold text-white">Cursos Profissionalizantes</h3>
+                  <p className="text-sm text-green-100">Aprenda novas profissões e técnicas</p>
+                </div>
+              </div>
+              <Button 
+                size="lg"
+                onClick={() => router.push('/cursos')}
+                className="bg-white text-green-900 hover:bg-green-50 font-bold shadow-xl"
+              >
+                Ver Cursos
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Bonificação CTA */}
+          <div className="mb-12 p-6 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl shadow-2xl">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
+                  <Gift className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-xl font-bold text-white">Sistema de Bonificação</h3>
+                  <p className="text-sm text-yellow-100">Ganhe pontos e recompensas por desempenho</p>
+                </div>
+              </div>
+              <Button 
+                size="lg"
+                onClick={() => router.push('/bonificacao')}
+                className="bg-white text-orange-900 hover:bg-orange-50 font-bold shadow-xl"
+              >
+                Ver Bonificações
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </div>
+          </div>
         </div>
 
         {/* Profile Selection Cards */}
@@ -97,6 +212,10 @@ export default function Home() {
                 <li className="flex items-start gap-2">
                   <span className="text-blue-600 mt-0.5 font-bold">✓</span>
                   <span>Mensagens seguras e privadas</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-0.5 font-bold">✓</span>
+                  <span>Negocie orçamentos facilmente</span>
                 </li>
               </ul>
               <Button 
@@ -138,6 +257,10 @@ export default function Home() {
                   <span className="text-orange-600 mt-0.5 font-bold">✓</span>
                   <span>Ganhe bonificações por desempenho</span>
                 </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-orange-600 mt-0.5 font-bold">✓</span>
+                  <span>Acesse cursos profissionalizantes</span>
+                </li>
               </ul>
               <Button 
                 className="w-full bg-gradient-to-r from-orange-600 to-amber-700 hover:from-orange-700 hover:to-amber-800 text-white shadow-lg"
@@ -151,37 +274,92 @@ export default function Home() {
         </div>
 
         {/* Features Section */}
-        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           <Card className="text-center border-2 border-amber-200 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all">
             <CardHeader>
+              <div className="mx-auto mb-2 w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                <DollarSign className="w-6 h-6 text-blue-600" />
+              </div>
               <CardTitle className="text-lg text-amber-900">Planos Flexíveis</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-gray-700">
-                Grátis (5%), Premium (10%) ou Equipe (15%) - escolha o melhor para você
+              <p className="text-sm text-gray-700 mb-3">
+                Grátis, Premium, Equipe ou Empreiteira - escolha o melhor para você
               </p>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => router.push('/planos')}
+                className="border-amber-300 hover:bg-amber-50"
+              >
+                Ver Planos
+              </Button>
             </CardContent>
           </Card>
 
           <Card className="text-center border-2 border-amber-200 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all">
             <CardHeader>
-              <CardTitle className="text-lg text-amber-900">Serviços de Limpeza</CardTitle>
+              <div className="mx-auto mb-2 w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                <GraduationCap className="w-6 h-6 text-green-600" />
+              </div>
+              <CardTitle className="text-lg text-amber-900">Cursos Online</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-gray-700">
-                Limpeza comercial, padrão, pesada, pré-mudança e pós-obra
+              <p className="text-sm text-gray-700 mb-3">
+                Aprenda novas profissões e técnicas com nossos cursos
               </p>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => router.push('/cursos')}
+                className="border-amber-300 hover:bg-amber-50"
+              >
+                Ver Cursos
+              </Button>
             </CardContent>
           </Card>
 
           <Card className="text-center border-2 border-amber-200 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all">
             <CardHeader>
-              <CardTitle className="text-lg text-amber-900">Busca de Materiais</CardTitle>
+              <div className="mx-auto mb-2 w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center">
+                <Gift className="w-6 h-6 text-yellow-600" />
+              </div>
+              <CardTitle className="text-lg text-amber-900">Bonificações</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-gray-700">
-                Encontre os melhores preços e fornecedores próximos a você
+              <p className="text-sm text-gray-700 mb-3">
+                Ganhe pontos e recompensas por desempenho excepcional
               </p>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => router.push('/bonificacao')}
+                className="border-amber-300 hover:bg-amber-50"
+              >
+                Ver Sistema
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="text-center border-2 border-amber-200 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all">
+            <CardHeader>
+              <div className="mx-auto mb-2 w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+                <Play className="w-6 h-6 text-purple-600" />
+              </div>
+              <CardTitle className="text-lg text-amber-900">Galeria e Vídeos</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-gray-700 mb-3">
+                Veja nossos serviços em ação com vídeos e fotos reais
+              </p>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => router.push('/galeria')}
+                className="border-amber-300 hover:bg-amber-50"
+              >
+                Ver Galeria
+              </Button>
             </CardContent>
           </Card>
         </div>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Check, X, Crown, Users, Zap, ArrowLeft } from 'lucide-react';
+import { Check, X, Crown, Users, Zap, ArrowLeft, Building } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -12,10 +12,10 @@ export default function PlanosPage() {
   const router = useRouter();
   const [selectedPlan, setSelectedPlan] = useState<PlanType | null>(null);
 
-  const handleSelectPlan = (plan: PlanType) => {
+  const handleSelectPlan = (plan: PlanType, price: number) => {
     setSelectedPlan(plan);
-    // Aqui você pode adicionar lógica para processar o upgrade/downgrade
-    alert(`Plano ${PLANS[plan].name} selecionado! Funcionalidade de pagamento em desenvolvimento.`);
+    // Redirecionar para página de pagamento
+    router.push(`/pagamento?plan=${plan}&price=${price}`);
   };
 
   return (
@@ -57,7 +57,7 @@ export default function PlanosPage() {
         </div>
 
         {/* Plans Grid */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12">
           {/* Plano Grátis */}
           <Card className="relative border-2 border-amber-300 hover:shadow-2xl transition-all duration-300 bg-white">
             <CardHeader className="text-center pb-4">
@@ -102,7 +102,7 @@ export default function PlanosPage() {
               </ul>
               <Button 
                 className="w-full bg-gray-600 hover:bg-gray-700"
-                onClick={() => handleSelectPlan('gratis')}
+                onClick={() => handleSelectPlan('gratis', 0)}
               >
                 Começar Grátis
               </Button>
@@ -155,12 +155,12 @@ export default function PlanosPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-gray-700 font-medium">Sem anúncios</span>
+                  <span className="text-sm text-gray-700 font-medium">Sistema de bonificação</span>
                 </li>
               </ul>
               <Button 
                 className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg"
-                onClick={() => handleSelectPlan('premium')}
+                onClick={() => handleSelectPlan('premium', 49.90)}
               >
                 Assinar Premium
               </Button>
@@ -213,25 +213,79 @@ export default function PlanosPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-gray-700 font-medium">API de integração</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-gray-700 font-medium">Gerente de conta dedicado</span>
+                  <span className="text-sm text-gray-700 font-medium">Bonificação premium</span>
                 </li>
               </ul>
               <Button 
                 className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 shadow-lg"
-                onClick={() => handleSelectPlan('equipe')}
+                onClick={() => handleSelectPlan('equipe', 99.90)}
               >
                 Assinar Equipe
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Plano Empreiteira - NOVO */}
+          <Card className="relative border-2 border-orange-500 hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-orange-50 to-white">
+            <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-600 text-white px-4 py-1">
+              EMPRESARIAL
+            </Badge>
+            <CardHeader className="text-center pb-4">
+              <div className="mx-auto mb-4 w-16 h-16 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg">
+                <Building className="w-8 h-8 text-white" />
+              </div>
+              <CardTitle className="text-2xl text-gray-900">Empreiteira</CardTitle>
+              <div className="mt-4">
+                <span className="text-4xl font-bold text-orange-600">R$ 199,90</span>
+                <span className="text-gray-600">/mês</span>
+              </div>
+              <CardDescription className="text-base text-gray-600 mt-2">
+                Para grandes empreiteiras
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-gray-700 font-medium">Tudo do Equipe</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-gray-700 font-medium">Comissão de 20%</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-gray-700 font-medium">Múltiplas equipes ilimitadas</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-gray-700 font-medium">Dashboard empresarial</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-gray-700 font-medium">Integração com ERP</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-gray-700 font-medium">Suporte prioritário dedicado</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-gray-700 font-medium">Treinamento da equipe incluído</span>
+                </li>
+              </ul>
+              <Button 
+                className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 shadow-lg"
+                onClick={() => handleSelectPlan('equipe', 199.90)}
+              >
+                Assinar Empreiteira
               </Button>
             </CardContent>
           </Card>
         </div>
 
         {/* Comparison Table */}
-        <div className="mt-16 max-w-4xl mx-auto">
+        <div className="mt-16 max-w-6xl mx-auto">
           <h3 className="text-2xl font-bold text-center text-gray-900 mb-8">
             Compare os recursos
           </h3>
@@ -245,6 +299,7 @@ export default function PlanosPage() {
                       <th className="text-center py-3 px-4 text-gray-900">Grátis</th>
                       <th className="text-center py-3 px-4 text-blue-600">Premium</th>
                       <th className="text-center py-3 px-4 text-purple-600">Equipe</th>
+                      <th className="text-center py-3 px-4 text-orange-600">Empreiteira</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -253,36 +308,49 @@ export default function PlanosPage() {
                       <td className="text-center py-3 px-4">3</td>
                       <td className="text-center py-3 px-4 font-medium">Ilimitado</td>
                       <td className="text-center py-3 px-4 font-medium">Ilimitado</td>
+                      <td className="text-center py-3 px-4 font-medium">Ilimitado</td>
                     </tr>
                     <tr className="border-b border-amber-100">
                       <td className="py-3 px-4 text-gray-700">Comissão</td>
                       <td className="text-center py-3 px-4">5%</td>
                       <td className="text-center py-3 px-4 font-medium">10%</td>
                       <td className="text-center py-3 px-4 font-medium">15%</td>
+                      <td className="text-center py-3 px-4 font-medium">20%</td>
                     </tr>
                     <tr className="border-b border-amber-100">
                       <td className="py-3 px-4 text-gray-700">Álbuns e Portfólios</td>
                       <td className="text-center py-3 px-4"><X className="w-5 h-5 text-red-400 mx-auto" /></td>
                       <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-blue-600 mx-auto" /></td>
                       <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-purple-600 mx-auto" /></td>
+                      <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-orange-600 mx-auto" /></td>
                     </tr>
                     <tr className="border-b border-amber-100">
                       <td className="py-3 px-4 text-gray-700">Cursos Profissionalizantes</td>
                       <td className="text-center py-3 px-4"><X className="w-5 h-5 text-red-400 mx-auto" /></td>
                       <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-blue-600 mx-auto" /></td>
                       <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-purple-600 mx-auto" /></td>
+                      <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-orange-600 mx-auto" /></td>
                     </tr>
                     <tr className="border-b border-amber-100">
-                      <td className="py-3 px-4 text-gray-700">Negociação de Orçamentos</td>
+                      <td className="py-3 px-4 text-gray-700">Sistema de Bonificação</td>
                       <td className="text-center py-3 px-4"><X className="w-5 h-5 text-red-400 mx-auto" /></td>
                       <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-blue-600 mx-auto" /></td>
                       <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-purple-600 mx-auto" /></td>
+                      <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-orange-600 mx-auto" /></td>
+                    </tr>
+                    <tr className="border-b border-amber-100">
+                      <td className="py-3 px-4 text-gray-700">Gestão de Equipes</td>
+                      <td className="text-center py-3 px-4"><X className="w-5 h-5 text-red-400 mx-auto" /></td>
+                      <td className="text-center py-3 px-4"><X className="w-5 h-5 text-red-400 mx-auto" /></td>
+                      <td className="text-center py-3 px-4"><Check className="w-5 h-5 text-purple-600 mx-auto" /></td>
+                      <td className="text-center py-3 px-4 font-medium">Ilimitado</td>
                     </tr>
                     <tr className="border-b border-amber-100">
                       <td className="py-3 px-4 text-gray-700">Suporte</td>
                       <td className="text-center py-3 px-4 text-sm">Email</td>
                       <td className="text-center py-3 px-4 font-medium">24/7</td>
                       <td className="text-center py-3 px-4 font-medium">24/7 + Gerente</td>
+                      <td className="text-center py-3 px-4 font-medium">Prioritário Dedicado</td>
                     </tr>
                   </tbody>
                 </table>
